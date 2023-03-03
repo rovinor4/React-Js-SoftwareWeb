@@ -1,7 +1,9 @@
 # LKS React Js Rovino Ramadhani
 
-* [X] Membuat Tampilan Landing Page
-* [ ] Membuat Tampilan Admin
+| Date             | Task                          | Done |
+| ---------------- | ----------------------------- | ---- |
+| 03-03-2023 20:37 | Membuat Tampilan Landing Page | OK   |
+| -                | Membuat Tampilan Admin        | -    |
 
 # Getting Started with Create React App
 
