@@ -9,7 +9,7 @@ function App() {
     return(
         <Bos.Container>
             <Bos.Row className='justify-content-center'>
-                <Bos.Col md={5} sm={12} className="my-5">
+                <Bos.Col md={6} sm={12} className="my-5">
                     <Bos.Card className='rounded-4 shadow overflow-hidden'>
                         <Bos.Card.Img src='/vector3.webp'></Bos.Card.Img>
                         <Bos.Card.Body className='p-4'>

@@ -3,7 +3,7 @@
 | Date             | Task                          | Done |
 | ---------------- | ----------------------------- | ---- |
 | 03-03-2023 20:37 | Membuat Tampilan Landing Page | OK   |
-| -                | Membuat Tampilan Admin        | -    |
+| 04-03-2023 21:00 | Membuat Tampilan Admin        | OK   |
 
 # Getting Started with Create React App
 

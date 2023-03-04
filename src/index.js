@@ -8,6 +8,9 @@ import NewsShow from './page/News-show';
 import NoPage from './page/NotPage';
 import AdminLogin from './admin/Login';
 import AdminHome from './admin/Home';
+import AdminNews from './admin/News';
+import AdminNewsCreate from './admin/News-Create';
+import AdminMyAccont from './admin/MyAccount';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -22,7 +25,10 @@ root.render(
       <Route path="/news/*" element={<NewsShow />}/>
       <Route path='admin'>
         <Route index element={<AdminLogin />}/>
-        <Route path="Home" element={<AdminHome/>}/>
+        <Route path="home" element={<AdminHome/>}/>
+        <Route path="news" element={<AdminNews/>}/>
+        <Route path="news/create" element={<AdminNewsCreate/>}/>
+        <Route path="my-account" element={<AdminMyAccont/>}/>
       </Route>
 
       <Route path="*" element={<NoPage />} />

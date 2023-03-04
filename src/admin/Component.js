@@ -1,16 +1,39 @@
 import * as React from 'react';
 import * as Bos from 'react-bootstrap';
 
+function Navigation(props){
+    var dataURL = {
+      "Home" : "/admin/home",
+      "News" : "/admin/news",
+      "My account" : "/admin/my-account",
+    }
+    const objEntries = Object.entries(dataURL);
+  
+    const items = objEntries.map(([key, value]) => {
+  
+      var x;
+      if(props.url == value){
+        x = <Bos.Nav.Link href={value} className="fw-bold text-primary bg-white rounded-pill px-4">{key}</Bos.Nav.Link>
+      }else{
+        x = <Bos.Nav.Link href={value} className="text-white opacity-75">{key}</Bos.Nav.Link>   
+      }
+      
+      return(x);
+    });
+  
+    return items;
+}
 
-function App() {
 
+function Navbar(props){
     return(
-        <Bos.Navbar className="shadow-s, bg-white" fixed="top" expand="lg">
-        <Bos.Container fluid>
-          <Bos.Navbar.Brand href="#home" className="text-white fw-bold">Admin</Bos.Navbar.Brand>
+        <Bos.Navbar bg="primary" className="shadow" fixed="top" expand="lg">
+        <Bos.Container>
+          <Bos.Navbar.Brand href="home" className="text-white fw-bold">Admin</Bos.Navbar.Brand>
           <Bos.Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Bos.Navbar.Collapse id="basic-navbar-nav">
             <Bos.Nav className="me-auto gap-3">
+              <Navigation url={props.url}/>
             </Bos.Nav>
           </Bos.Navbar.Collapse>
         </Bos.Container>
@@ -18,4 +41,4 @@ function App() {
     );
 }
 
-export default App;
+export default Navbar;
