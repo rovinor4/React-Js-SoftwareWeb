@@ -10,7 +10,7 @@ function App() {
 
     return(
         <>
-            <Navbar url="/admin/my-account"/>
+            <Navbar url="/akun/my-account"/>
             <Bos.Container className='shadow p-5 rounded-5 clearfix' style={{ marginTop : "100px", marginBottom : "100px"}}>
                 <Bos.Row className='mb-4 gx-4 gy-3'>
                     <h4>User data information</h4>

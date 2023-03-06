@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as Bos from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 function Navigation(props){
     var dataURL = {
-      "Home" : "/admin/home",
-      "News" : "/admin/news",
-      "My account" : "/admin/my-account",
+      "Home" : "/akun/",
+      "News" : "/akun/news",
+      "My account" : "/akun/my-account",
     }
     const objEntries = Object.entries(dataURL);
   
@@ -13,9 +14,9 @@ function Navigation(props){
   
       var x;
       if(props.url == value){
-        x = <Bos.Nav.Link href={value} className="fw-bold text-primary bg-white rounded-pill px-4">{key}</Bos.Nav.Link>
+        x = <Bos.Nav.Link as={NavLink} to={value} className="fw-bold text-primary bg-white rounded-pill px-4">{key}</Bos.Nav.Link>
       }else{
-        x = <Bos.Nav.Link href={value} className="text-white opacity-75">{key}</Bos.Nav.Link>   
+        x = <Bos.Nav.Link as={NavLink} to={value} className="text-white opacity-75">{key}</Bos.Nav.Link>   
       }
       
       return(x);

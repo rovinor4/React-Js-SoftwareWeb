@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as Bos from 'react-bootstrap';
+import { Link, NavLink } from 'react-router-dom';
 
 function Navigation(props){
     var dataURL = {
@@ -14,15 +15,27 @@ function Navigation(props){
   
       var x;
       if(props.url == value){
-        x = <Bos.Nav.Link href={value} className="fw-bold text-primary bg-white rounded-pill px-4">{key}</Bos.Nav.Link>
+        x = <Bos.Nav.Link as={NavLink} to={value} className="fw-bold text-primary bg-white rounded-pill px-4">{key}</Bos.Nav.Link>
       }else{
-        x = <Bos.Nav.Link href={value} className="text-white opacity-75">{key}</Bos.Nav.Link>   
+        x = <Bos.Nav.Link as={NavLink} to={value} className="text-white opacity-75">{key}</Bos.Nav.Link>   
       }
       
       return(x);
     });
   
     return items;
+}
+
+const ButtonLogin = () => {
+    var x = null;
+
+    if(localStorage._token){
+      x = <Link to={"/akun"}><Bos.Button variant='outline-light'>Open My Account</Bos.Button></Link>
+    }else{
+      x = <Link to={"/login"}><Bos.Button variant='outline-light'>Login Or Register</Bos.Button></Link>
+    }
+
+    return x;
 }
 
 
@@ -36,6 +49,8 @@ function Navbar(props){
             <Bos.Nav className="me-auto gap-3">
               <Navigation url={props.url}/>
             </Bos.Nav>
+            
+            <ButtonLogin/>
           </Bos.Navbar.Collapse>
         </Bos.Container>
       </Bos.Navbar>

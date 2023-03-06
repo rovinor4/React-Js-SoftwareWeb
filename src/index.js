@@ -7,6 +7,7 @@ import News from './page/News';
 import NewsShow from './page/News-show';
 import NoPage from './page/NotPage';
 import AdminLogin from './admin/Login';
+import AdminRegister from './admin/Register';
 import AdminHome from './admin/Home';
 import AdminNews from './admin/News';
 import AdminNewsCreate from './admin/News-Create';
@@ -23,9 +24,10 @@ root.render(
       <Route path="/download" element={<Download />}/>
       <Route path="/news" element={<News />}/>
       <Route path="/news/*" element={<NewsShow />}/>
-      <Route path='admin'>
-        <Route index element={<AdminLogin />}/>
-        <Route path="home" element={<AdminHome/>}/>
+      <Route path='/login' element={<AdminLogin />}/>
+      <Route path='/register' element={<AdminRegister />}/>
+      <Route path='akun'>
+        <Route index element={<AdminHome/>}/>
         <Route path="news" element={<AdminNews/>}/>
         <Route path="news/create" element={<AdminNewsCreate/>}/>
         <Route path="my-account" element={<AdminMyAccont/>}/>

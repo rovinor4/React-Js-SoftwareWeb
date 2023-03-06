@@ -9,6 +9,7 @@ import $ from 'jquery'
 
 function App() {
 
+    const [Name, setName] = React.useState('');
     const [Email, setEmail] = React.useState('');
     const [Password, setPassword] = React.useState('');
     const Navigate = useNavigate();
@@ -38,8 +39,9 @@ function App() {
         validate();
         $.ajax({
             type: "POST",
-            url: "http://127.0.0.1:8000/api/user/login",
+            url: "http://127.0.0.1:8000/api/user/store",
             data: {
+                name : Name,
                 email : Email,
                 password : Password
             },
@@ -60,11 +62,15 @@ function App() {
                 <Bos.Col md={6} sm={12} className="my-5">
                     <form id='form' onSubmit={submit}>
                         <Bos.Card className='rounded-4 shadow overflow-hidden'>
-                            <Bos.Card.Img src='/vector3.webp' style={{ height:"300px" }}></Bos.Card.Img>
+                            <Bos.Card.Img src='/vector5.webp' style={{ height:"300px" }}></Bos.Card.Img>
                             <Bos.Card.Body className='p-4'>
-                                <h4 className='fw-bold text-primary m-0 mb-1'>Access to your account</h4>
-                                <p className='text-muted m-0'>You just need an email and password</p>
+                                <h4 className='fw-bold text-primary m-0 mb-1'>Create your account</h4>
+                                <p className='text-muted m-0'>You just need to enter your name, email and password</p>
                                 <hr/>
+                                    <Bos.FormFloating className='mb-3'>
+                                        <Bos.FormControl placeholder=' ' onInput={(e)=>{setName(e.target.value)}} value={Name}/>
+                                        <Bos.FormLabel>Your Name</Bos.FormLabel>
+                                    </Bos.FormFloating>
                                     <Bos.FormFloating className='mb-3'>
                                         <Bos.FormControl placeholder=' ' onInput={(e)=>{setEmail(e.target.value)}} value={Email}/>
                                         <Bos.FormLabel>Your Email</Bos.FormLabel>
@@ -75,10 +81,10 @@ function App() {
                                     </Bos.FormFloating>
                             </Bos.Card.Body>
                             <Bos.Card.Footer className='px-4 py-3 d-flex justify-content-end gap-3'>
-                                <Link to={"/register"}>
-                                    <span className='btn btn-outline-dark'>Register</span>
+                                <Link to={"/login"}>
+                                    <span className='btn btn-outline-dark'>Login</span>
                                 </Link>
-                                <Bos.Button type='submit'>Login</Bos.Button>
+                                <Bos.Button type='submit'>Register</Bos.Button>
                             </Bos.Card.Footer>
                         </Bos.Card>
                     </form>

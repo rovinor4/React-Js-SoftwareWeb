@@ -39,18 +39,22 @@ function App() {
         setValue("")
     }
     
-    $(`#dropdown .edit`).on("click", function () {
+    $(`#dropdown .edit`).on("click", function (e) {
+        e.preventDefault()
         setShow(true);
         var x = $(this).attr("href");
         setTextEdit(x);
         setTextStatus(true);
         setValue($(`div[data-id="${x}"]`).html())
+        $("#dropdown").removeClass("show");
     });
 
 
-    $(`#dropdown .hapus`).on("click", function () {
+    $(`#dropdown .hapus`).on("click", function (e) {
         var x = $(this).attr("href");
         $(`div[data-id="${x}"]`).remove();
+        $("#dropdown").removeClass("show");
+        e.preventDefault()
     });
 
 
@@ -80,7 +84,7 @@ function App() {
 
     return(
         <>
-            <Navbar url="/admin/news"/>
+            <Navbar url="/akun/news"/>
             <Bos.Container style={{ marginTop : "100px", marginBottom : "100px" }}>
                 <Bos.Row>
                     <Bos.Col md={8} id="main">

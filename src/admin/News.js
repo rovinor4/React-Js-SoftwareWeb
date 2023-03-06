@@ -6,11 +6,27 @@ import Navbar from '../admin/Component';
 import $ from 'jquery'
 
 function App() {
- 
+
+    $("tbody").ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8000/api/news/all",
+            success: function (response) {
+                                
+            },error: function(xml){
+                var x =xml.responseJSON["message"];                
+                $("tbody").html(`<tr><td colSpan="4"><h5 class="text-center text-primary">${x}</h5></td></tr>`);
+            }
+        });
+    });
+
+
+
+
 
     return(
         <>
-            <Navbar url="/admin/news"/>
+            <Navbar url="/akun/news"/>
             <Bos.Container className='shadow p-4 rounded-5 border' style={{ marginTop : "100px" }}>
                 <Bos.Row className='mb-4 g-4'>
                     <Bos.Col md={8}>
@@ -46,23 +62,7 @@ function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Say Hallo</td>
-                        <td>Say-Hallo</td>
-                        <td style={{ width : "60px" }}>
-                        <Bos.Dropdown>
-                            <Bos.Dropdown.Toggle variant="primary" id="dropdown-basic">
-                            </Bos.Dropdown.Toggle>
 
-                            <Bos.Dropdown.Menu>
-                                <Bos.Dropdown.Item href="#/action-1">Edit</Bos.Dropdown.Item>
-                                <Bos.Dropdown.Item href="#/action-2">Open New Tab</Bos.Dropdown.Item>
-                                <Bos.Dropdown.Item href="#/action-3">Delete</Bos.Dropdown.Item>
-                            </Bos.Dropdown.Menu>
-                        </Bos.Dropdown>
-                        </td>
-                    </tr>
                 </tbody>
                 </Bos.Table>
                 <Bos.Button className='mx-auto d-block mt-4 '>Load More</Bos.Button>
