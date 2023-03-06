@@ -7,12 +7,16 @@ import $ from 'jquery'
 
 function App() {
 
+    const [data,setData] = React.useState([]);
+
+
+
     $("tbody").ready(function () {
         $.ajax({
             type: "POST",
             url: "http://127.0.0.1:8000/api/news/all",
             success: function (response) {
-                                
+                setData(response["data"]);
             },error: function(xml){
                 var x =xml.responseJSON["message"];                
                 $("tbody").html(`<tr><td colSpan="4"><h5 class="text-center text-primary">${x}</h5></td></tr>`);
@@ -62,7 +66,27 @@ function App() {
                     </tr>
                 </thead>
                 <tbody>
+                    {data["data"].map((datas) => {
+                        return (
+                            <tr>
+                                <td>1</td>
+                                <td>Say Hallo</td>
+                                <td>Say-Hallo</td>
+                                <td style={{ width : "60px" }}>
+                                <Bos.Dropdown>
+                                    <Bos.Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                    </Bos.Dropdown.Toggle>
 
+                                    <Bos.Dropdown.Menu>
+                                        <Bos.Dropdown.Item href="#/action-1" key={"edit"+datas.id}>Edit</Bos.Dropdown.Item>
+                                        <Bos.Dropdown.Item href="#/action-2" key={"open"+datas.id}>Open New Tab</Bos.Dropdown.Item>
+                                        <Bos.Dropdown.Item href="#/action-3" key={"delete"+datas.id}>Delete</Bos.Dropdown.Item>
+                                    </Bos.Dropdown.Menu>
+                                </Bos.Dropdown>
+                                </td>
+                            </tr>
+                        )
+                    })}
                 </tbody>
                 </Bos.Table>
                 <Bos.Button className='mx-auto d-block mt-4 '>Load More</Bos.Button>
