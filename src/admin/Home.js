@@ -4,17 +4,19 @@ import * as React from 'react';
 import * as Bos from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '../admin/Component';
+import {CekAkun} from "../controller/main";
 
 
 function App() {
 
     const Navigate = useNavigate();
+    CekAkun();
 
     React.useEffect(() => {
         if(!localStorage._token){
             Navigate("/login")
         }
-    },[]);
+    });
     
     const logOut = () => {
         localStorage.clear();

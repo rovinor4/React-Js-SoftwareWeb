@@ -3,10 +3,21 @@ import '/node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import * as React from 'react';
 import * as Bos from 'react-bootstrap';
 import Navbar from '../admin/Component';
+import { Link, useNavigate } from 'react-router-dom';
 import $ from 'jquery'
+import {CekAkun} from "../controller/main";
 
 function App() {
  
+    const Navigate = useNavigate();
+    CekAkun();
+
+    React.useEffect(() => {
+        if(!localStorage._token){
+            Navigate("/login")
+        }
+    });
+
 
     return(
         <>

@@ -30,7 +30,7 @@ function Navbar(props){
     return(
         <Bos.Navbar bg="primary" className="shadow" fixed="top" expand="lg">
         <Bos.Container>
-          <Bos.Navbar.Brand href="home" className="text-white fw-bold">Admin</Bos.Navbar.Brand>
+          <Bos.Navbar.Brand href="/akun" className="text-white fw-bold">Admin</Bos.Navbar.Brand>
           <Bos.Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Bos.Navbar.Collapse id="basic-navbar-nav">
             <Bos.Nav className="me-auto gap-3">

@@ -2,12 +2,10 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '/node_modules/bootstrap-icons/font/bootstrap-icons.css';
 import * as React from 'react';
 import * as Bos from 'react-bootstrap';
-import Navbar from '../admin/Component';
+import Navbar from './Component';
 import $ from 'jquery'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { Link, useNavigate } from 'react-router-dom';
-import {CekAkun} from "../controller/main";
 
 function App() {
 
@@ -17,24 +15,8 @@ function App() {
     const [textStatus, setTextStatus] = React.useState(false);
     const [divId, setDivId] = React.useState(1);
     const [textEdit, setTextEdit] = React.useState(0);
-    const [Judul, setJudul] = React.useState("");
-    const [Slug, setSlug] = React.useState("");
-    const [Isi, setIsi] = React.useState("");
-    const [UrlImage, setUrlImage] = React.useState("");
     const handleClose = () => setShow(false);
-    const myDivRef = React.useRef(null);
-    CekAkun();
-    const Navigate = useNavigate();
-
-    React.useEffect(() => {
-
-        if(!localStorage._token){
-            Navigate("/login")
-        }
-
-    },[])
-
-
+    
     const CreatePrg = () => {
         var x = $("#setText .ql-editor").html();
         if(x === ""){
@@ -98,35 +80,6 @@ function App() {
         setImageShow(true);
     }
 
-    const slugCreate = (title) => {
-        setSlug(title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
-    }
-
-
-    const simpan = () => {
-        var x = new FormData();
-        x.append("judul",Judul);
-        x.append("slug",Slug);
-        x.append("isi",Isi);
-
-        const fetchReq = {
-            method: 'POST',
-            body :  x
-        };
-
-        fetch("http://127.0.0.1:8000/api/news/store",fetchReq)
-        .then(res => res.json()) 
-        .then(
-            (result) => {
-                alert("Berhasil Di Tambahkan")
-            },
-            (error) => {
-                alert("Terjadi Kesalahan : " + error)
-            }
-        )
-
-
-    }
 
 
     return(
@@ -134,8 +87,7 @@ function App() {
             <Navbar url="/akun/news"/>
             <Bos.Container style={{ marginTop : "100px", marginBottom : "100px" }}>
                 <Bos.Row>
-                    <Bos.Col md={8} id="main" onChange={(e)=>{setIsi(e.target.innerHtml); console.log(setIsi)}}  ref={myDivRef}>
-                        {Isi}
+                    <Bos.Col md={8} id="main">
                     </Bos.Col>
                     <Bos.Col md={4}> 
                         <Bos.Card>
@@ -149,22 +101,22 @@ function App() {
                                     </Bos.Tab>
                                     <Bos.Tab eventKey="Detail" title="Detail">
                                         <Bos.FormFloating className='mb-3'>
-                                            <Bos.FormControl value={Judul} onChange={(e)=>{slugCreate(e.target.value)}} onInput={(e) => {setJudul(e.target.value)}}></Bos.FormControl>
+                                            <Bos.FormControl></Bos.FormControl>
                                             <Bos.FormLabel>Judul</Bos.FormLabel>
                                         </Bos.FormFloating>
                                         <Bos.FormFloating className='mb-3'>
-                                            <Bos.FormControl value={Slug} disabled></Bos.FormControl>
+                                            <Bos.FormControl></Bos.FormControl>
                                             <Bos.FormLabel>Slug</Bos.FormLabel>
                                         </Bos.FormFloating>
                                         <Bos.FormFloating className='mb-3'>
-                                            <Bos.FormControl value={UrlImage} onInput={(e)=>{setUrlImage(e.target.value)}}></Bos.FormControl>
-                                            <Bos.FormLabel>Url Image</Bos.FormLabel>
+                                            <Bos.FormControl></Bos.FormControl>
+                                            <Bos.FormLabel>Judul</Bos.FormLabel>
                                         </Bos.FormFloating>
                                     </Bos.Tab>
                                 </Bos.Tabs>
                             </Bos.Card.Body>
                             <Bos.Card.Footer>
-                                <Bos.Button className='float-end' onClick={simpan}>Simpan</Bos.Button>
+                                <Bos.Button className='float-end'>Simpan</Bos.Button>
                             </Bos.Card.Footer>
                         </Bos.Card>
                     </Bos.Col>
@@ -200,11 +152,32 @@ function App() {
                     <Bos.Button variant='danger' onClick={() => {setImageShow(false)}}>Close</Bos.Button>
                 </Bos.Modal.Header>
                 <Bos.Modal.Body>
-                    <Bos.FormLabel>Url Gambar</Bos.FormLabel>
-                    <Bos.FormControl type='url'/>
-                    <div className='d-flex mt-4 justify-content-end'>
-                        <Bos.Button>Submit</Bos.Button>
-                    </div>
+                    <Bos.Tabs defaultActiveKey="Select" id="uncontrolled-tab-example" className="mb-3">
+                        <Bos.Tab eventKey="Select" title="Select">
+                            <Bos.FormCheck>
+                                <Bos.FormCheck.Label>
+                                <Bos.FormCheck.Input></Bos.FormCheck.Input>
+                                    https://image.png
+                                </Bos.FormCheck.Label>
+                            </Bos.FormCheck>
+                            <hr/>
+                            <div className='d-flex mt-4 justify-content-end'>
+                                <Bos.Button>Submit</Bos.Button>
+                            </div>
+                        </Bos.Tab>
+                        <Bos.Tab eventKey="Upload" title="Upload">
+                            <Bos.FormControl type='file'/>
+                            <div className='d-flex mt-4 justify-content-end'>
+                                <Bos.Button>Submit</Bos.Button>
+                            </div>
+                        </Bos.Tab>
+                        <Bos.Tab eventKey="UrlLink" title="Url Link">
+                            <Bos.FormControl type='url'/>
+                            <div className='d-flex mt-4 justify-content-end'>
+                                <Bos.Button>Submit</Bos.Button>
+                            </div>
+                        </Bos.Tab>
+                    </Bos.Tabs>
                 </Bos.Modal.Body>
             </Bos.Modal>
 
