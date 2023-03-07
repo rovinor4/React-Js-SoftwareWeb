@@ -7,25 +7,48 @@ import $ from 'jquery'
 
 function App() {
 
-    const [data,setData] = React.useState([]);
+    const [error, setError] = React.useState(null);
+    const [isLoaded, setIsLoaded] = React.useState(false);
+    const [items, setItems] = React.useState([]);
 
 
-
-    $("tbody").ready(function () {
-        $.ajax({
-            type: "POST",
-            url: "http://127.0.0.1:8000/api/news/all",
-            success: function (response) {
-                setData(response["data"]);
-            },error: function(xml){
-                var x =xml.responseJSON["message"];                
-                $("tbody").html(`<tr><td colSpan="4"><h5 class="text-center text-primary">${x}</h5></td></tr>`);
+    
+    React.useEffect(() => {
+        const fetchReq = {
+            method: 'POST',
+        };
+        fetch("http://127.0.0.1:8000/api/news/all",fetchReq)
+          .then(
+            (result) => {
+                console.log(result.data);
+              setIsLoaded(true);
+              setItems(result);
+            },
+            (error) => {
+              setIsLoaded(true);
+              setError(error);
             }
-        });
-    });
+        )
+    }, [])
 
 
-
+    // const fungsi = () => {
+    //     if (error) {
+    //         return <div>Error: {error.message}</div>;
+    //     } else if (!isLoaded) {
+    //         return <div>Loading...</div>;
+    //     } else {
+    //         return (
+    //         <ul>
+    //             {items.map(item => (
+    //             <li key={item.id}>
+    //                 {item.name} {item.price}
+    //             </li>
+    //             ))}
+    //         </ul>
+    //         );
+    //     }    
+    // }
 
 
     return(
@@ -66,29 +89,42 @@ function App() {
                     </tr>
                 </thead>
                 <tbody>
-                    {data["data"].map((datas) => {
-                        return (
+                    {
+                        error ? (
                             <tr>
-                                <td>1</td>
-                                <td>Say Hallo</td>
-                                <td>Say-Hallo</td>
-                                <td style={{ width : "60px" }}>
-                                <Bos.Dropdown>
-                                    <Bos.Dropdown.Toggle variant="primary" id="dropdown-basic">
-                                    </Bos.Dropdown.Toggle>
-
-                                    <Bos.Dropdown.Menu>
-                                        <Bos.Dropdown.Item href="#/action-1" key={"edit"+datas.id}>Edit</Bos.Dropdown.Item>
-                                        <Bos.Dropdown.Item href="#/action-2" key={"open"+datas.id}>Open New Tab</Bos.Dropdown.Item>
-                                        <Bos.Dropdown.Item href="#/action-3" key={"delete"+datas.id}>Delete</Bos.Dropdown.Item>
-                                    </Bos.Dropdown.Menu>
-                                </Bos.Dropdown>
-                                </td>
+                                <td>Error: {error.message}</td>
                             </tr>
-                        )
-                    })}
+                        ) : (
+                            items.map(item => (
+                                <tr>
+                                    <td>1</td>
+                                    <td>Say Hallo</td>
+                                    <td>Say-Hallo</td>
+                                    <td style={{ width : "60px" }}>
+                                    <Bos.Dropdown>
+                                        <Bos.Dropdown.Toggle variant="primary" id="dropdown-basic">
+                                        </Bos.Dropdown.Toggle>
+
+                                        <Bos.Dropdown.Menu>
+                                            <Bos.Dropdown.Item href="#/action-1" key={"edit"}>Edit</Bos.Dropdown.Item>
+                                            <Bos.Dropdown.Item href="#/action-2" key={"open"}>Open New Tab</Bos.Dropdown.Item>
+                                            <Bos.Dropdown.Item href="#/action-3" key={"delete"}>Delete</Bos.Dropdown.Item>
+                                        </Bos.Dropdown.Menu>
+                                    </Bos.Dropdown>
+                                    </td>
+                                </tr> 
+                            ))
+                        ) 
+                    }
+
+
+
+
+
+
                 </tbody>
                 </Bos.Table>
+                    <fungsi/>
                 <Bos.Button className='mx-auto d-block mt-4 '>Load More</Bos.Button>
             </Bos.Container>
         </>
