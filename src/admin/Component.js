@@ -6,7 +6,7 @@ function Navigation(props){
     var dataURL = {
       "Home" : "/akun/",
       "News" : "/akun/news",
-      "My account" : "/akun/my-account",
+      // "My account" : "/akun/my-account",
     }
     const objEntries = Object.entries(dataURL);
   

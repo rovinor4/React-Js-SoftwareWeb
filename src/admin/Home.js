@@ -31,9 +31,9 @@ function App() {
                 <h3 className='fw-bold text-primary'>Welcome To Admin</h3>
                 <p>Selamat Pagi, Rovino Ramadhani</p>
                 <div className='d-flex justify-content-center gap-3 align-items-center' style={{ height : "max-content" }}>
-                    <Link to={"/akun/my-account"}>
+                    {/* <Link to={"/akun/my-account"}>
                         <Bos.Button variant='dark' className='fw-bold'>My account</Bos.Button>
-                    </Link>
+                    </Link> */}
                     <Bos.Button variant='outline-danger' className='fw-bold' onClick={logOut}>Log Out</Bos.Button>
                 </div>
             </Bos.Container>
